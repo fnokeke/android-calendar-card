@@ -6,49 +6,39 @@ import android.util.AttributeSet;
 import android.view.View;
 
 public class CalendarCardPager extends ViewPager {
-	
-	private CardPagerAdapter mCardPagerAdapter;
-	private OnCellItemClick mOnCellItemClick;
-	
-	public CalendarCardPager(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs);
-		init(context);
-	}
 
-	public CalendarCardPager(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		init(context);
-	}
-	
-	public CalendarCardPager(Context context) {
-		super(context);
-		init(context);
-	}
-	
-	private void init(Context context) {
-		 mCardPagerAdapter = new CardPagerAdapter(context);
-		 setAdapter(mCardPagerAdapter);
-	}
-	
-	public CardPagerAdapter getCardPagerAdapter() {
-		return mCardPagerAdapter;
-	}
+    private CardPagerAdapter mCardPagerAdapter;
+    private CalendarCard.OnDateSelectedListener onDateSelectedListener;
 
-	public OnCellItemClick getOnCellItemClick() {
-		return mOnCellItemClick;
-	}
+    public CalendarCardPager(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs);
+        init();
+    }
 
-	public void setOnCellItemClick(OnCellItemClick mOnCellItemClick) {
-		this.mOnCellItemClick = mOnCellItemClick;
-		mCardPagerAdapter.setDefaultOnCellItemClick(this.mOnCellItemClick);
-		if (getChildCount() > 0) {
-			for(int i=0; i<getChildCount(); i++) {
-				View v = getChildAt(i);
-				if (v instanceof CalendarCard) {
-					((CalendarCard) v).setOnCellItemClick(this.mOnCellItemClick);
-				}
-			}
-		}
-	}
+    public CalendarCardPager(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init();
+    }
+
+    public CalendarCardPager(Context context) {
+        super(context);
+        init();
+    }
+
+    private void init() {
+        mCardPagerAdapter = new CardPagerAdapter(getContext());
+        setAdapter(mCardPagerAdapter);
+    }
+
+    public void setOnCellItemClick(CalendarCard.OnDateSelectedListener dateSelectedListener) {
+        this.onDateSelectedListener = dateSelectedListener;
+        mCardPagerAdapter.setOnDateSelectedListener(this.onDateSelectedListener);
+        for (int i = 0; i < getChildCount(); i++) {
+            View v = getChildAt(i);
+            if (v instanceof CalendarCard) {
+                ((CalendarCard) v).setOnDateSelectedListener(this.onDateSelectedListener);
+            }
+        }
+    }
 
 }

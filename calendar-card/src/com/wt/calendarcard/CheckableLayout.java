@@ -1,6 +1,5 @@
 package com.wt.calendarcard;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -15,29 +14,16 @@ public class CheckableLayout extends RelativeLayout implements Checkable {
     
     private boolean checked = false;
 
-    @SuppressLint("NewApi")
     public CheckableLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init();
     }
 
     public CheckableLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
     }
 
     public CheckableLayout(Context context) {
         super(context);
-        init();
-    }
-    
-    private void init() {
-    	/*setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				setChecked(!isChecked());
-			}
-		});*/
     }
 
     @Override

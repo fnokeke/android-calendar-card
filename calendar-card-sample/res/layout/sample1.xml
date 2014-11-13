@@ -5,8 +5,7 @@
 
     <com.wt.calendarcard.CalendarCard
         android:id="@+id/calendarCard1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        style="@style/CalendarCard.Root"/>
 
     <TextView
         android:id="@+id/textView1"
