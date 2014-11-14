@@ -90,7 +90,6 @@ public class CalendarCard extends LinearLayout {
                         }
                     }
                 });
-                cellDay.addView(inflater.inflate(R.layout.card_item_simple, cellDay, false));
                 cells.add(cellDay);
             }
         }

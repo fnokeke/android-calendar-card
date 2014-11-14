@@ -5,7 +5,7 @@
         android:id="@+id/cardTitle"/>
     
     <LinearLayout 
-        style="@style/CalendarCard.Days"
+        style="@style/CalendarCard.Week"
         android:id="@+id/cardDays">
         
         <TextView 
