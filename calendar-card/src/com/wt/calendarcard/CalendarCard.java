@@ -162,10 +162,7 @@ public class CalendarCard extends LinearLayout {
             counter++;
         }
 
-        if (dateDisplay != null)
-            calendar = (Calendar) dateDisplay.clone();
-        else
-            calendar = Calendar.getInstance();
+        calendar = dateDisplay != null ? (Calendar) dateDisplay.clone() : Calendar.getInstance();
 
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
 

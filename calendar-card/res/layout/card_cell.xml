@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<com.wt.calendarcard.CheckableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"
-    style="@style/CalendarCard.Cell"
-    android:clickable="true">
 
-</com.wt.calendarcard.CheckableLayout>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckedTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:textColor="@color/cell_text_color"
+            android:id="@+id/checkedTextView"
+            />
+</merge>
