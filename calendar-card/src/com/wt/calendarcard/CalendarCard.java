@@ -2,7 +2,6 @@ package com.wt.calendarcard;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,10 +22,8 @@ public class CalendarCard extends LinearLayout {
     private ArrayList<CheckableLayout> cells = new ArrayList<CheckableLayout>();
     private LinearLayout cardGrid;
 
-    private LayoutInflater inflater;
-
     public CalendarCard(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
+        super(context, attrs, R.style.CalendarCard_Root);
         init();
     }
 
@@ -50,24 +47,20 @@ public class CalendarCard extends LinearLayout {
 
     private void init() {
         setOrientation(VERTICAL);
-        inflater = LayoutInflater.from(getContext());
         inflate(getContext(), R.layout.card_view, this);
-
         cardTitle = (TextView) findViewById(R.id.cardTitle);
         cardGrid = (LinearLayout) findViewById(R.id.cardGrid);
-
         if (dateDisplay == null) {
             dateDisplay = Calendar.getInstance();
         }
         cardTitle.setText(new SimpleDateFormat("MMM yyyy", Locale.getDefault()).format(dateDisplay.getTime()));
-
         initWeekTitle();
         initCellDay();
 
         mOnItemRenderDefault = new OnItemRender() {
             @Override
             public void onRender(CheckableLayout v, CardGridItem item) {
-                ((TextView) v.getChildAt(0)).setText(item.getDayOfMonth().toString());
+                ((TextView) v.findViewById(R.id.textView)).setText(item.getDayOfMonth().toString());
             }
         };
 
@@ -79,11 +72,12 @@ public class CalendarCard extends LinearLayout {
             LinearLayout rowWeek = (LinearLayout) cardGrid.getChildAt(y);
             for (int x = 0; x < rowWeek.getChildCount(); x++) {
                 CheckableLayout cellDay = (CheckableLayout) rowWeek.getChildAt(x);
+                cellDay.setSelected(x == 1);
                 cellDay.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         for (CheckableLayout cell : cells) {
-                            cell.setChecked(cell == view);
+                            cell.setClicked(cell == view);
                         }
                         if (onDateSelectedListener != null) {
                             onDateSelectedListener.onDateSelected(view, (CardGridItem) view.getTag());
@@ -96,28 +90,18 @@ public class CalendarCard extends LinearLayout {
     }
 
     private void initWeekTitle() {
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-        ((TextView) findViewById(R.id.cardDay1)).setText(cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault()));
-        cal.add(Calendar.DAY_OF_WEEK, 1);
-        ((TextView) findViewById(R.id.cardDay2)).setText(cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault()));
-        cal.add(Calendar.DAY_OF_WEEK, 1);
-        ((TextView) findViewById(R.id.cardDay3)).setText(cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault()));
-        cal.add(Calendar.DAY_OF_WEEK, 1);
-        ((TextView) findViewById(R.id.cardDay4)).setText(cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault()));
-        cal.add(Calendar.DAY_OF_WEEK, 1);
-        ((TextView) findViewById(R.id.cardDay5)).setText(cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault()));
-        cal.add(Calendar.DAY_OF_WEEK, 1);
-        ((TextView) findViewById(R.id.cardDay6)).setText(cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault()));
-        cal.add(Calendar.DAY_OF_WEEK, 1);
-        ((TextView) findViewById(R.id.cardDay7)).setText(cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault()));
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        LinearLayout cardDays = (LinearLayout)findViewById(R.id.cardDays);
+        for (int index = 0; index < cardDays.getChildCount(); index++) {
+            TextView child = (TextView)cardDays.getChildAt(index);
+            child.setText(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault()));
+            calendar.add(Calendar.DAY_OF_WEEK, 1);
+        }
     }
 
     private int getDaySpacing(int dayOfWeek) {
-        if (Calendar.SUNDAY == dayOfWeek)
-            return 6;
-        else
-            return dayOfWeek - 2;
+        return Calendar.SUNDAY == dayOfWeek ? 6 : dayOfWeek - 2;
     }
 
     private int getDaySpacingEnd(int dayOfWeek) {
@@ -127,11 +111,8 @@ public class CalendarCard extends LinearLayout {
     private void updateCells() {
         Integer counter = 0;
         Calendar calendar = dateDisplay == null ? Calendar.getInstance() : (Calendar) dateDisplay.clone();
-
         calendar.set(Calendar.DAY_OF_MONTH, 1);
-
         int daySpacing = getDaySpacing(calendar.get(Calendar.DAY_OF_WEEK));
-
         if (daySpacing > 0) {
             Calendar prevMonth = (Calendar) calendar.clone();
             prevMonth.add(Calendar.MONTH, -1);
@@ -157,16 +138,14 @@ public class CalendarCard extends LinearLayout {
             cell.setTag(new CardGridItem(i).setEnabled(true).setDate(date));
             cell.setEnabled(true);
             cell.setVisibility(View.VISIBLE);
+            if (isToday(date)) cell.setActivated(true);
             (mOnItemRender == null ? mOnItemRenderDefault : mOnItemRender).onRender(cell, (CardGridItem) cell.getTag());
             counter++;
         }
 
         calendar = dateDisplay != null ? (Calendar) dateDisplay.clone() : Calendar.getInstance();
-
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-
         daySpacing = getDaySpacingEnd(calendar.get(Calendar.DAY_OF_WEEK));
-
         if (daySpacing > 0) {
             for (int i = 0; i < daySpacing; i++) {
                 CheckableLayout cell = cells.get(counter);
@@ -177,7 +156,6 @@ public class CalendarCard extends LinearLayout {
                 counter++;
             }
         }
-
         if (counter < cells.size()) {
             for (int i = counter; i < cells.size(); i++) {
                 cells.get(i).setVisibility(View.GONE);
@@ -211,6 +189,13 @@ public class CalendarCard extends LinearLayout {
 
     public void notifyChanges() {
         updateCells();
+    }
+
+    private boolean isToday(Calendar calendar) {
+        if (calendar == null) return false;
+        Calendar today = Calendar.getInstance(Locale.getDefault());
+        long compareMillions = today.getTimeInMillis() - calendar.getTimeInMillis();
+        return compareMillions > 0 && compareMillions < 1000 * 3600 * 24;
     }
 
     public interface OnDateSelectedListener {
