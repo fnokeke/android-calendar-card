@@ -146,7 +146,7 @@ public class CalendarCard extends LinearLayout {
         calendar = dateDisplay != null ? (Calendar) dateDisplay.clone() : Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
         daySpacing = getDaySpacingEnd(calendar.get(Calendar.DAY_OF_WEEK));
-        if (daySpacing > 0) {
+        if ( daySpacing < 7) {
             for (int i = 0; i < daySpacing; i++) {
                 CheckableLayout cell = cells.get(counter);
                 cell.setTag(new CardGridItem(i + 1).setEnabled(false));
@@ -155,11 +155,8 @@ public class CalendarCard extends LinearLayout {
                 (mOnItemRender == null ? mOnItemRenderDefault : mOnItemRender).onRender(cell, (CardGridItem) cell.getTag());
                 counter++;
             }
-        }
-        if (counter < cells.size()) {
-            for (int i = counter; i < cells.size(); i++) {
-                cells.get(i).setVisibility(View.GONE);
-            }
+        } else {
+            cardGrid.getChildAt(cardGrid.getChildCount() - 1).setVisibility(View.GONE);
         }
     }
 
