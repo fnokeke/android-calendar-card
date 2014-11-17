@@ -37,25 +37,18 @@
 	        style="@style/CalendarCard.Day" />
         
     </LinearLayout>
-    
-    <ScrollView 
-        android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_below="@+id/cardDays">
 
-	    <LinearLayout
-	        style="@style/CalendarCard.Grid"
-	        android:id="@+id/cardGrid">
-	        
-	        <include layout="@layout/card_row"/>
-	        <include layout="@layout/card_row"/>
-	        <include layout="@layout/card_row"/>
-	        <include layout="@layout/card_row"/>
-	        <include layout="@layout/card_row"/>
-	        <include layout="@layout/card_row"/>
-	        
-	    </LinearLayout>
-    
-    </ScrollView>
+    <LinearLayout
+        style="@style/CalendarCard.Grid"
+        android:id="@+id/cardGrid">
+
+        <include layout="@layout/card_row"/>
+        <include layout="@layout/card_row"/>
+        <include layout="@layout/card_row"/>
+        <include layout="@layout/card_row"/>
+        <include layout="@layout/card_row"/>
+        <include layout="@layout/card_row"/>
+
+    </LinearLayout>
 
 </merge>

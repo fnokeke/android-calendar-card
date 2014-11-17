@@ -72,7 +72,6 @@ public class CalendarCard extends LinearLayout {
             LinearLayout rowWeek = (LinearLayout) cardGrid.getChildAt(y);
             for (int x = 0; x < rowWeek.getChildCount(); x++) {
                 CheckableLayout cellDay = (CheckableLayout) rowWeek.getChildAt(x);
-                cellDay.setSelected(x == 1);
                 cellDay.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {

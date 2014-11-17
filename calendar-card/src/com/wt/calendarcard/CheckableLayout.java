@@ -8,7 +8,7 @@ import com.wt.calendar_card.R;
 public class CheckableLayout extends RelativeLayout{
 
     public CheckableLayout(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
+        super(context, attrs, R.style.CalendarCard_Cell);
         init();
     }
 

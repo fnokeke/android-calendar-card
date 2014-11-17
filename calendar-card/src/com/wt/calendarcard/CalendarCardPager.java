@@ -28,6 +28,7 @@ public class CalendarCardPager extends ViewPager {
     private void init() {
         mCardPagerAdapter = new CardPagerAdapter(getContext());
         setAdapter(mCardPagerAdapter);
+        setCurrentItem(CardPagerAdapter.MAX_WEEKS / 2);
     }
 
     public void setOnCellItemClick(CalendarCard.OnDateSelectedListener dateSelectedListener) {
