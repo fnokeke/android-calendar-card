@@ -90,7 +90,7 @@ public class CalendarCard extends LinearLayout {
 
     private void initWeekTitle() {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         LinearLayout cardDays = (LinearLayout)findViewById(R.id.cardDays);
         for (int index = 0; index < cardDays.getChildCount(); index++) {
             TextView child = (TextView)cardDays.getChildAt(index);
@@ -109,7 +109,7 @@ public class CalendarCard extends LinearLayout {
 
     private void updateCells() {
         Integer counter = 0;
-        Calendar calendar = dateDisplay == null ? Calendar.getInstance() : (Calendar) dateDisplay.clone();
+        Calendar calendar = (Calendar) dateDisplay.clone();
         calendar.set(Calendar.DAY_OF_MONTH, 1);
         int daySpacing = getDaySpacing(calendar.get(Calendar.DAY_OF_WEEK));
         if (daySpacing > 0) {
@@ -129,6 +129,7 @@ public class CalendarCard extends LinearLayout {
         int firstDay = calendar.get(Calendar.DAY_OF_MONTH);
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
         int lastDay = calendar.get(Calendar.DAY_OF_MONTH) + 1;
+        if (!isThisMonth(calendar)) cells.get(counter).setClicked(true);
         for (int i = firstDay; i < lastDay; i++) {
             calendar.set(Calendar.DAY_OF_MONTH, i - 1);
             Calendar date = (Calendar) calendar.clone();
@@ -137,12 +138,13 @@ public class CalendarCard extends LinearLayout {
             cell.setTag(new CardGridItem(i).setEnabled(true).setDate(date));
             cell.setEnabled(true);
             cell.setVisibility(View.VISIBLE);
-            if (isToday(date)) cell.setActivated(true);
+            cell.setActivated(isToday(date));
             (mOnItemRender == null ? mOnItemRenderDefault : mOnItemRender).onRender(cell, (CardGridItem) cell.getTag());
             counter++;
         }
 
-        calendar = dateDisplay != null ? (Calendar) dateDisplay.clone() : Calendar.getInstance();
+
+        calendar = (Calendar) dateDisplay.clone();
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
         daySpacing = getDaySpacingEnd(calendar.get(Calendar.DAY_OF_WEEK));
         if ( daySpacing < 7) {
@@ -190,8 +192,14 @@ public class CalendarCard extends LinearLayout {
     private boolean isToday(Calendar calendar) {
         if (calendar == null) return false;
         Calendar today = Calendar.getInstance(Locale.getDefault());
-        long compareMillions = today.getTimeInMillis() - calendar.getTimeInMillis();
-        return compareMillions > 0 && compareMillions < 1000 * 3600 * 24;
+        return isThisMonth(calendar) &&  today.get(Calendar.DATE) == calendar.get(Calendar.DATE);
+    }
+
+    private boolean isThisMonth(Calendar calendar) {
+        if (calendar == null) return false;
+        Calendar today = Calendar.getInstance(Locale.getDefault());
+        return today.get(Calendar.YEAR) == calendar.get(Calendar.YEAR) &&
+                today.get(Calendar.MONTH) == calendar.get(Calendar.MONTH);
     }
 
     public interface OnDateSelectedListener {
