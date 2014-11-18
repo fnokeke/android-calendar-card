@@ -7,5 +7,6 @@
     <string name="card">Calendar Card</string>
     <string name="card_pager">Calendar Card Pager</string>
     <string name="sel_date">Selected date: %s</string>
+    <string name="card_list">Calendar Card List</string>
 
 </resources>

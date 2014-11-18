@@ -103,10 +103,6 @@ public class CalendarCard extends LinearLayout {
         return Calendar.SUNDAY == dayOfWeek ? 6 : dayOfWeek - 2;
     }
 
-    private int getDaySpacingEnd(int dayOfWeek) {
-        return 8 - dayOfWeek;
-    }
-
     private void updateCells() {
         Integer counter = 0;
         Calendar calendar = (Calendar) dateDisplay.clone();
@@ -147,18 +143,14 @@ public class CalendarCard extends LinearLayout {
 
         calendar = (Calendar) dateDisplay.clone();
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-        daySpacing = getDaySpacingEnd(calendar.get(Calendar.DAY_OF_WEEK));
-        if ( daySpacing < 7) {
-            for (int i = 0; i < daySpacing; i++) {
-                CheckableLayout cell = cells.get(counter);
-                cell.setTag(new CardGridItem(i + 1).setEnabled(false));
-                cell.setEnabled(false);
-                cell.setVisibility(View.VISIBLE);
-                (mOnItemRender == null ? mOnItemRenderDefault : mOnItemRender).onRender(cell, (CardGridItem) cell.getTag());
-                counter++;
-            }
-        } else {
-            cardGrid.getChildAt(cardGrid.getChildCount() - 1).setVisibility(View.GONE);
+        daySpacing = 7 * 6 - counter;
+        for (int i = 0; i < daySpacing; i++) {
+            CheckableLayout cell = cells.get(counter);
+            cell.setTag(new CardGridItem(i + 1).setEnabled(false));
+            cell.setEnabled(false);
+            cell.setVisibility(View.VISIBLE);
+            (mOnItemRender == null ? mOnItemRenderDefault : mOnItemRender).onRender(cell, (CardGridItem) cell.getTag());
+            counter++;
         }
     }
 
@@ -186,6 +178,10 @@ public class CalendarCard extends LinearLayout {
         cardTitle.setText(new SimpleDateFormat("MMM yyyy", Locale.getDefault()).format(dateDisplay.getTime()));
     }
 
+    public Calendar getDateDisplay() {
+        return this.dateDisplay;
+    }
+
     public void notifyChanges() {
         updateCells();
     }
@@ -201,6 +197,10 @@ public class CalendarCard extends LinearLayout {
         Calendar today = Calendar.getInstance(Locale.getDefault());
         return today.get(Calendar.YEAR) == calendar.get(Calendar.YEAR) &&
                 today.get(Calendar.MONTH) == calendar.get(Calendar.MONTH);
+    }
+
+    public void hideTitle() {
+        cardTitle.setVisibility(View.GONE);
     }
 
     public interface OnDateSelectedListener {

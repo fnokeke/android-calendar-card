@@ -1,19 +1,15 @@
 package com.wt.calendarcard;
 
 import android.content.Context;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class CalendarCardPager extends ViewPager {
+public class CalendarCardPager extends WrapViewPager {
 
     private CardPagerAdapter mCardPagerAdapter;
     private CalendarCard.OnDateSelectedListener onDateSelectedListener;
 
-    public CalendarCardPager(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs);
-        init();
-    }
+    private final int currentPosition = CardPagerAdapter.MAX_WEEKS / 2;
 
     public CalendarCardPager(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -28,7 +24,7 @@ public class CalendarCardPager extends ViewPager {
     private void init() {
         mCardPagerAdapter = new CardPagerAdapter(getContext());
         setAdapter(mCardPagerAdapter);
-        setCurrentItem(CardPagerAdapter.MAX_WEEKS / 2);
+        setCurrentItem(currentPosition);
         setOnPageChangeListener(new OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i2) {

@@ -11,10 +11,12 @@ public class CardPagerAdapter extends PagerAdapter {
 
     private Context mContext;
     private CalendarCard.OnDateSelectedListener onDateSelectedListener;
+    private ViewGroup.LayoutParams lp;
 
     public static final int MAX_WEEKS = 1000;
     public CalendarCard[] cards = new CalendarCard[MAX_WEEKS];
     public CardPagerAdapter(Context context) {
+        lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         mContext = context;
     }
 
@@ -23,11 +25,12 @@ public class CardPagerAdapter extends PagerAdapter {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.MONTH, position - MAX_WEEKS / 2);
         CalendarCard card = new CalendarCard(mContext);
+        card.hideTitle();
         card.setDateDisplay(cal);
         card.notifyChanges();
         if (card.getOnDateSelectedListener() == null)
             card.setOnDateSelectedListener(onDateSelectedListener);
-        container.addView(card, 0);
+        container.addView(card, 0, lp);
         cards[position] = card;
         return card;
     }

@@ -20,6 +20,14 @@
     <style name="CalendarCard">
         
     </style>
+
+    <style name="CalendarCard.CalendarCardList">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:animateLayoutChanges">true</item>
+    </style>
     
     <style name="CalendarCard.Root">
         <item name="android:layout_width">match_parent</item>

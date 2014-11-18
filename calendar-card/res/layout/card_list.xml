@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_height="48dp"
+        android:layout_width="match_parent"
+        android:padding="8dp"
+        >
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:text="November"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:id="@+id/monthToggle"
+            />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="4dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_menu_today_no_date_holo_light"
+            android:id="@+id/todayBtn"
+            />
+    </RelativeLayout>
+    <com.wt.calendarcard.WrapViewPager
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewPager"
+        />
+    <View
+        android:layout_height="1px"
+        android:layout_width="match_parent"
+        android:background="#80bebebe"
+        />
+    <ListView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:scrollbars="none"
+        android:id="@+id/listView"
+        />
+
+</merge>

@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@id/textView1"
         android:layout_marginTop="27dp"
         android:onClick="handleSample1"
         android:text="@string/card" />
@@ -32,8 +32,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/button1"
+        android:layout_below="@id/button1"
         android:onClick="handleSample2"
         android:text="@string/card_pager" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/button2"
+        android:onClick="handleSample3"
+        android:text="@string/card_list" />
 
 </RelativeLayout>
