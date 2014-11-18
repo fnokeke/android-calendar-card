@@ -139,6 +139,7 @@ public class CalendarCard extends LinearLayout {
             cell.setEnabled(true);
             cell.setVisibility(View.VISIBLE);
             cell.setActivated(isToday(date));
+            cell.setClicked(!isThisMonth(date) && i == firstDay);
             (mOnItemRender == null ? mOnItemRenderDefault : mOnItemRender).onRender(cell, (CardGridItem) cell.getTag());
             counter++;
         }

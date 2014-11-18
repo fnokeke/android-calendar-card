@@ -13,7 +13,7 @@ public class CardPagerAdapter extends PagerAdapter {
     private CalendarCard.OnDateSelectedListener onDateSelectedListener;
 
     public static final int MAX_WEEKS = 1000;
-
+    public CalendarCard[] cards = new CalendarCard[MAX_WEEKS];
     public CardPagerAdapter(Context context) {
         mContext = context;
     }
@@ -28,6 +28,7 @@ public class CardPagerAdapter extends PagerAdapter {
         if (card.getOnDateSelectedListener() == null)
             card.setOnDateSelectedListener(onDateSelectedListener);
         container.addView(card, 0);
+        cards[position] = card;
         return card;
     }
 
@@ -49,5 +50,7 @@ public class CardPagerAdapter extends PagerAdapter {
     public void setOnDateSelectedListener(CalendarCard.OnDateSelectedListener onDateSelectedListener) {
         this.onDateSelectedListener = onDateSelectedListener;
     }
+
+
 
 }
