@@ -11,12 +11,6 @@ the events in everyday can be marked out in that days. More details you can chec
 May this can help you!
 
 ##ScreenShot
-[![CalendarCard Sample1][1]][1]
-[![CalendarCard Sample2][2]][2]
 [![CalendarCard Sample3 - Show Calendar][3]][3]
-[![CalendarCard Sample3 - Hide Calendar][4]][4]
 
-[1]: https://github.com/gongmingqm10/android-calendar-card/raw/master/calendar-card-sample/images/sample-1.png
-[2]: https://github.com/gongmingqm10/android-calendar-card/raw/master/calendar-card-sample/images/sample-2.png
 [3]: https://github.com/gongmingqm10/android-calendar-card/raw/master/calendar-card-sample/images/sample-3.png
-[4]: https://github.com/gongmingqm10/android-calendar-card/raw/master/calendar-card-sample/images/sample-3.1.png
