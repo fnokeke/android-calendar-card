@@ -5,7 +5,6 @@ import android.os.Bundle;
 import com.google.gson.Gson;
 import com.wt.calendarcard.CalendarCardList;
 import com.wt.calendarcard.model.Note;
-import com.wt.calendarcard.model.NoteWrapper;
 import org.json.JSONArray;
 import org.json.JSONException;
 
