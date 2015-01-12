@@ -11,16 +11,16 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 public class Sample1 extends Activity {
-	
-	private CalendarCard mCalendarCard;
-	private TextView mTextView;
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.sample1);
-        mTextView = (TextView)findViewById(R.id.textView1);
-		mCalendarCard = (CalendarCard)findViewById(R.id.calendarCard1);
+
+    private CalendarCard mCalendarCard;
+    private TextView mTextView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.sample1);
+        mTextView = (TextView) findViewById(R.id.textView1);
+        mCalendarCard = (CalendarCard) findViewById(R.id.calendarCard1);
         mCalendarCard.setOnDateSelectedListener(new CalendarCard.OnDateSelectedListener() {
             @Override
             public void onDateSelected(View view, CardGridItem item) {
@@ -28,6 +28,6 @@ public class Sample1 extends Activity {
             }
         });
 
-	}
+    }
 
 }

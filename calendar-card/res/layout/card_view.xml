@@ -1,41 +1,41 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
-    
+
     <TextView
         style="@style/CalendarCard.Title"
         android:id="@+id/cardTitle"/>
-    
-    <LinearLayout 
+
+    <LinearLayout
         style="@style/CalendarCard.Week"
         android:id="@+id/cardDays">
-        
-        <TextView 
-	        android:id="@+id/cardDay1"
-	        style="@style/CalendarCard.Day" />
-        
-        <TextView 
-	        android:id="@+id/cardDay2"
-	        style="@style/CalendarCard.Day" />
-        
-        <TextView 
-	        android:id="@+id/cardDay3"
-	        style="@style/CalendarCard.Day" />
-        
-        <TextView 
-	        android:id="@+id/cardDay4"
-	        style="@style/CalendarCard.Day" />
-        
-        <TextView 
-	        android:id="@+id/cardDay5"
-	        style="@style/CalendarCard.Day" />
-        
-        <TextView 
-	        android:id="@+id/cardDay6"
-	        style="@style/CalendarCard.Day" />
-        
-        <TextView 
-	        android:id="@+id/cardDay7"
-	        style="@style/CalendarCard.Day" />
-        
+
+        <TextView
+            android:id="@+id/cardDay1"
+            style="@style/CalendarCard.Day"/>
+
+        <TextView
+            android:id="@+id/cardDay2"
+            style="@style/CalendarCard.Day"/>
+
+        <TextView
+            android:id="@+id/cardDay3"
+            style="@style/CalendarCard.Day"/>
+
+        <TextView
+            android:id="@+id/cardDay4"
+            style="@style/CalendarCard.Day"/>
+
+        <TextView
+            android:id="@+id/cardDay5"
+            style="@style/CalendarCard.Day"/>
+
+        <TextView
+            android:id="@+id/cardDay6"
+            style="@style/CalendarCard.Day"/>
+
+        <TextView
+            android:id="@+id/cardDay7"
+            style="@style/CalendarCard.Day"/>
+
     </LinearLayout>
 
     <LinearLayout

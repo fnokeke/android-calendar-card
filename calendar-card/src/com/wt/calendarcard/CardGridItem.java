@@ -4,49 +4,49 @@ import java.util.Calendar;
 
 public class CardGridItem {
 
-	private Integer dayOfMonth;
-	private Object data;
-	private boolean enabled = true;
-	private Calendar date;
-	
-	public CardGridItem(Integer dom) { 
-		setDayOfMonth(dom);
-	}
+    private Integer dayOfMonth;
+    private Object data;
+    private boolean enabled = true;
+    private Calendar date;
 
-	public Integer getDayOfMonth() {
-		return dayOfMonth;
-	}
+    public CardGridItem(Integer dom) {
+        setDayOfMonth(dom);
+    }
 
-	public CardGridItem setDayOfMonth(Integer dayOfMonth) {
-		this.dayOfMonth = dayOfMonth;
-		return this;
-	}
+    public Integer getDayOfMonth() {
+        return dayOfMonth;
+    }
 
-	public Object getData() {
-		return data;
-	}
+    public CardGridItem setDayOfMonth(Integer dayOfMonth) {
+        this.dayOfMonth = dayOfMonth;
+        return this;
+    }
 
-	public CardGridItem setData(Object data) {
-		this.data = data;
-		return this;
-	}
+    public Object getData() {
+        return data;
+    }
 
-	public boolean isEnabled() {
-		return enabled;
-	}
+    public CardGridItem setData(Object data) {
+        this.data = data;
+        return this;
+    }
 
-	public CardGridItem setEnabled(boolean enabled) {
-		this.enabled = enabled;
-		return this;
-	}
+    public boolean isEnabled() {
+        return enabled;
+    }
 
-	public Calendar getDate() {
-		return date;
-	}
+    public CardGridItem setEnabled(boolean enabled) {
+        this.enabled = enabled;
+        return this;
+    }
 
-	public CardGridItem setDate(Calendar date) {
-		this.date = date;
-		return this;
-	}
-	
+    public Calendar getDate() {
+        return date;
+    }
+
+    public CardGridItem setDate(Calendar date) {
+        this.date = date;
+        return this;
+    }
+
 }

@@ -6,10 +6,13 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.wt.calendar_card.R;
+import com.wt.calendarcard.model.Event;
+import com.wt.calendarcard.model.Note;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public class CalendarCard extends LinearLayout {
@@ -21,6 +24,7 @@ public class CalendarCard extends LinearLayout {
     private Calendar dateDisplay;
     private ArrayList<CheckableLayout> cells = new ArrayList<CheckableLayout>();
     private LinearLayout cardGrid;
+    private List<Note> notes;
 
     public CalendarCard(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, R.style.CalendarCard_Root);
@@ -91,9 +95,9 @@ public class CalendarCard extends LinearLayout {
     private void initWeekTitle() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-        LinearLayout cardDays = (LinearLayout)findViewById(R.id.cardDays);
+        LinearLayout cardDays = (LinearLayout) findViewById(R.id.cardDays);
         for (int index = 0; index < cardDays.getChildCount(); index++) {
-            TextView child = (TextView)cardDays.getChildAt(index);
+            TextView child = (TextView) cardDays.getChildAt(index);
             child.setText(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault()));
             calendar.add(Calendar.DAY_OF_WEEK, 1);
         }
@@ -125,17 +129,29 @@ public class CalendarCard extends LinearLayout {
         int firstDay = calendar.get(Calendar.DAY_OF_MONTH);
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
         int lastDay = calendar.get(Calendar.DAY_OF_MONTH) + 1;
-        if (!isThisMonth(calendar)) cells.get(counter).setClicked(true);
+//        if (!isThisMonth(calendar)) {
+//            cells.get(counter).performClick();
+//        }
+//        if (!isThisMonth(calendar)) cells.get(counter).setClicked(true);
         for (int i = firstDay; i < lastDay; i++) {
             calendar.set(Calendar.DAY_OF_MONTH, i - 1);
             Calendar date = (Calendar) calendar.clone();
             date.add(Calendar.DAY_OF_MONTH, 1);
             CheckableLayout cell = cells.get(counter);
-            cell.setTag(new CardGridItem(i).setEnabled(true).setDate(date));
+            Event[] events = getEventsByDay(calendar);
+            cell.setSelected(events != null);
+            cell.setTag(new CardGridItem(i).setEnabled(true).setDate(date).setData(events));
             cell.setEnabled(true);
             cell.setVisibility(View.VISIBLE);
             cell.setActivated(isToday(date));
-            cell.setClicked(!isThisMonth(date) && i == firstDay);
+            if (isToday(date)) {
+                cell.setActivated(true);
+                cell.performClick();
+            } else {
+                cell.setActivated(false);
+            }
+            if (!isThisMonth(date) && i == firstDay) cell.performClick();
+//            cell.setClicked(!isThisMonth(date) && i == firstDay);
             (mOnItemRender == null ? mOnItemRenderDefault : mOnItemRender).onRender(cell, (CardGridItem) cell.getTag());
             counter++;
         }
@@ -189,7 +205,7 @@ public class CalendarCard extends LinearLayout {
     private boolean isToday(Calendar calendar) {
         if (calendar == null) return false;
         Calendar today = Calendar.getInstance(Locale.getDefault());
-        return isThisMonth(calendar) &&  today.get(Calendar.DATE) == calendar.get(Calendar.DATE);
+        return isThisMonth(calendar) && today.get(Calendar.DATE) == calendar.get(Calendar.DATE);
     }
 
     private boolean isThisMonth(Calendar calendar) {
@@ -201,6 +217,20 @@ public class CalendarCard extends LinearLayout {
 
     public void hideTitle() {
         cardTitle.setVisibility(View.GONE);
+    }
+
+    public void setNotes(List<Note> noteOfMonth) {
+        if (noteOfMonth != null && noteOfMonth.size() != 0)
+            notes = noteOfMonth;
+    }
+
+    private Event[] getEventsByDay(Calendar calendar) {
+        if (notes == null || calendar == null) return null;
+        for (Note note : notes) {
+            if (calendar.get(Calendar.DATE) == note.getDate().get(Calendar.DATE))
+                return note.getEvents();
+        }
+        return null;
     }
 
     public interface OnDateSelectedListener {

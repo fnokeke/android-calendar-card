@@ -6,5 +6,6 @@
               android:layout_height="match_parent">
     <com.wt.calendarcard.CalendarCardList
         style="@style/CalendarCard.CalendarCardList"
+        android:id="@+id/calendarList"
         />
 </LinearLayout>

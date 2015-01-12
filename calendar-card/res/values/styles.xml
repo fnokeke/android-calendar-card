@@ -16,9 +16,9 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-    
+
     <style name="CalendarCard">
-        
+
     </style>
 
     <style name="CalendarCard.CalendarCardList">
@@ -28,13 +28,13 @@
         <item name="android:background">@android:color/white</item>
         <item name="android:animateLayoutChanges">true</item>
     </style>
-    
+
     <style name="CalendarCard.Root">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">10dp</item>
     </style>
-    
+
     <style name="CalendarCard.Day">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -43,7 +43,7 @@
         <item name="android:gravity">center</item>
         <item name="android:color">#ff4c4c4c</item>
     </style>
-    
+
     <style name="CalendarCard.Week">
         <item name="android:paddingTop">6dp</item>
         <item name="android:paddingBottom">6dp</item>
@@ -51,7 +51,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">horizontal</item>
     </style>
-    
+
     <style name="CalendarCard.Title">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -59,7 +59,7 @@
         <item name="android:textSize">16sp</item>
         <item name="android:gravity">center</item>
     </style>
-    
+
     <style name="CalendarCard.Grid">
         <item name="android:paddingRight">1dp</item>
         <item name="android:paddingBottom">1dp</item>

@@ -2,10 +2,12 @@ package com.wt.calendarcard;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.*;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import com.wt.calendar_card.R;
 
-public class CheckableLayout extends RelativeLayout{
+public class CheckableLayout extends RelativeLayout {
 
     public CheckableLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, R.style.CalendarCard_Cell);
@@ -27,7 +29,7 @@ public class CheckableLayout extends RelativeLayout{
 
     private void init() {
         inflate(getContext(), R.layout.card_cell, this);
-        textView = (TextView)findViewById(R.id.textView);
+        textView = (TextView) findViewById(R.id.textView);
         imageView = (ImageView) findViewById(R.id.imageView);
         setClicked(false);
     }
