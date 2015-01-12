@@ -1,19 +1,22 @@
-android-calendar-card ([Google Play Demo][4])
+android-calendar-card
 =====================
 
-Android calendar view (lke card)
-Simple and easy to modify
+This Android Calendar View is forked from (kenumir/android-calendar-card)[https://github.com/kenumir/android-calendar-card].
 
+With the lolipop theme published, a newly android-calendar-card shows here.
 
-[![CalendarCard screenshot][1]][1]
-[![2]][2]
+It's easy for you to make any custom style or events. Here I applied it to view like a calendar. Provided with json data,
+the events in everyday can be marked out in that days. More details you can check the attached screenshot.
 
-#CalendarCardPager
+May this can help you!
 
-[![CalendarCardPager screenshot2][3]][3]
+##ScreenShot
+[![CalendarCard Sample1][1]][1]
+[![CalendarCard Sample2][2]][2]
+[![CalendarCard Sample3 - Show Calendar][3]][3]
+[![CalendarCard Sample3 - Hide Calendar][4]][4]
 
-
-[1]: https://github.com/kenumir/android-calendar-card/raw/master/calendar-card-sample/_work/device-2013-10-12-151801.png
-[2]: https://github.com/kenumir/android-calendar-card/raw/master/calendar-card-sample/_work/device-2013-10-12-151717.png
-[3]: https://github.com/kenumir/android-calendar-card/raw/master/calendar-card-sample/_work/card_view_pager2.png
-[4]: https://play.google.com/store/apps/details?id=com.wt.calendarcardsample
+[1]: https://github.com/gongmingqm10/android-calendar-card/raw/master/calendar-card-sample/images/sample-1.png
+[2]: https://github.com/gongmingqm10/android-calendar-card/raw/master/calendar-card-sample/images/sample-2.png
+[3]: https://github.com/gongmingqm10/android-calendar-card/raw/master/calendar-card-sample/images/sample-3.png
+[4]: https://github.com/gongmingqm10/android-calendar-card/raw/master/calendar-card-sample/images/sample-3.1.png
