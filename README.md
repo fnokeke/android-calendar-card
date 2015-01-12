@@ -1,7 +1,7 @@
 android-calendar-card
 =====================
 
-This Android Calendar View is forked from (kenumir/android-calendar-card)[https://github.com/kenumir/android-calendar-card].
+This Android Calendar View is forked from [kenumir/android-calendar-card](https://github.com/kenumir/android-calendar-card).
 
 With the lolipop theme published, a newly android-calendar-card shows here.
 
