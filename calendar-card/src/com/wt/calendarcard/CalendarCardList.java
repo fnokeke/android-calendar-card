@@ -13,11 +13,42 @@ import com.wt.calendarcard.model.Event;
 import com.wt.calendarcard.model.Note;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 public class CalendarCardList extends LinearLayout {
+    private WrapViewPager calendarPager;
+    private ImageView todayBtn;
+    private TextView monthToggle;
+    private ListView listView;
+    private CardPagerAdapter calendarAdapter;
+    private EventsAdapter eventsAdapter;
+    private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int i, float v, int i2) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            CalendarCard calendarCard = calendarAdapter.cards[position];
+            if (calendarCard == null) return;
+            calendarCard.notifyChanges();
+            monthToggle.setText(
+                    new SimpleDateFormat(
+                            "MMM yyyy",
+                            Locale.getDefault()).format(calendarCard.getDateDisplay().getTime()
+                    )
+            );
+            eventsAdapter.notifyDataSetChanged();
+
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int i) {
+
+        }
+    };
+
     public CalendarCardList(Context context) {
         super(context);
         init();
@@ -33,60 +64,26 @@ public class CalendarCardList extends LinearLayout {
         init();
     }
 
-
-    private ViewPager calendarPager;
-    private ImageView todayBtn;
-    private TextView monthToggle;
-    private ListView listView;
-
-    private CardPagerAdapter calendarAdapter;
-    private EventsAdapter eventsAdapter;
-
-    private List<Note> notes;
-
     private void init() {
         setOrientation(VERTICAL);
 
-        notes = new ArrayList<Note>();
-
         inflate(getContext(), R.layout.card_list, this);
-        calendarPager = (ViewPager) findViewById(R.id.viewPager);
+        calendarPager = (WrapViewPager) findViewById(R.id.viewPager);
         todayBtn = (ImageView) findViewById(R.id.todayBtn);
         monthToggle = (TextView) findViewById(R.id.monthToggle);
+
         listView = (ListView) findViewById(R.id.listView);
-
-        calendarAdapter = new CardPagerAdapter(getContext());
-        calendarPager.setAdapter(calendarAdapter);
-        calendarPager.setCurrentItem(CardPagerAdapter.MAX_WEEKS / 2);
-
         eventsAdapter = new EventsAdapter(getContext());
         listView.setAdapter(eventsAdapter);
 
-        calendarPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int i, float v, int i2) {
+        calendarAdapter = new CardPagerAdapter(getContext());
+        calendarPager.setAdapter(calendarAdapter);
 
-            }
+        bindListener();
+    }
 
-            @Override
-            public void onPageSelected(int position) {
-                CalendarCard calendarCard = calendarAdapter.cards[position];
-                calendarCard.notifyChanges();
-                monthToggle.setText(
-                        new SimpleDateFormat(
-                                "MMM yyyy",
-                                Locale.getDefault()).format(calendarCard.getDateDisplay().getTime()
-                        )
-                );
-                eventsAdapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int i) {
-
-            }
-        });
+    private void bindListener() {
+        calendarPager.setOnPageChangeListener(pageChangeListener);
 
         calendarAdapter.setOnDateSelectedListener(new CalendarCard.OnDateSelectedListener() {
             @Override
@@ -113,11 +110,11 @@ public class CalendarCardList extends LinearLayout {
                 }
             }
         });
-
     }
 
     public void setDataSource(Note[] data) {
         calendarAdapter.setNotes(data);
+        calendarPager.setCurrentItem(CardPagerAdapter.MAX_WEEKS / 2);
     }
 
 

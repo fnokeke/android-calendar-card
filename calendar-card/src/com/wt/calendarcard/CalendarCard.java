@@ -2,6 +2,7 @@ package com.wt.calendarcard;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -143,15 +144,15 @@ public class CalendarCard extends LinearLayout {
             cell.setTag(new CardGridItem(i).setEnabled(true).setDate(date).setData(events));
             cell.setEnabled(true);
             cell.setVisibility(View.VISIBLE);
-            cell.setActivated(isToday(date));
             if (isToday(date)) {
-                cell.setActivated(true);
                 cell.performClick();
-            } else {
+                cell.setActivated(true);
+            }
+            else {
                 cell.setActivated(false);
             }
             if (!isThisMonth(date) && i == firstDay) cell.performClick();
-//            cell.setClicked(!isThisMonth(date) && i == firstDay);
+            cell.setClicked(!isThisMonth(date) && i == firstDay);
             (mOnItemRender == null ? mOnItemRenderDefault : mOnItemRender).onRender(cell, (CardGridItem) cell.getTag());
             counter++;
         }
