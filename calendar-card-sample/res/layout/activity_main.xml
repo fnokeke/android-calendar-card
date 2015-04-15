@@ -45,4 +45,13 @@
         android:onClick="handleSample3"
         android:text="@string/card_list"/>
 
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/button3"
+        android:onClick="handleSample4"
+        android:text="Calendar Scroll View"/>
+
 </RelativeLayout>

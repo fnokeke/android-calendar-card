@@ -24,5 +24,8 @@ public class MainActivity extends Activity {
     public void handleSample3(View v) {
         startActivity(new Intent(this, Sample3.class));
     }
-
+    
+    public void handleSample4(View v) {
+        startActivity(new Intent(this, Sample4.class));
+    }
 }
