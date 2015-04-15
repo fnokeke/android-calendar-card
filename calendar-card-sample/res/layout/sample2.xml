@@ -7,7 +7,7 @@
               android:animateLayoutChanges="true">
 
     <com.wt.calendarcard.CalendarCardPager
-        android:id="@+id/calendarCard1"
+        android:id="@+id/calendarCard2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <TextView
