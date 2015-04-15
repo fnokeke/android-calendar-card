@@ -72,7 +72,7 @@ In some business requirement you may need a vertical scrollable Calendar, the Vi
 to load the CalendarCard in a ListView. So that every list item will be one month Calendar item. The effect is also nice.
 More details you can see CalendarListAdapter in the calendar-card-sample project.
 
-# Design
+## Design
 
 Redesigned the Calendar UI based on the previous CalendarCard. The new UI is aimed for the Android New material design. You
 may found some design is similar to Google Calendar, but that's what I want to build. Below is a part of CalendarCardPager.
@@ -80,3 +80,22 @@ may found some design is similar to Google Calendar, but that's what I want to b
 [![CalendarCard Sample3 - Show Calendar][3]][3]
 
 [3]: https://github.com/gongmingqm10/android-calendar-card/raw/master/calendar-card-sample/images/sample-3.png
+
+
+## License 
+
+```
+Copyright 2013-2015 Michał Szwarc & gongmingqm10
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
