@@ -65,6 +65,13 @@ pager.setOnCellItemClick(new CalendarCard.OnDateSelectedListener() {
 CalendarCardList is the View contains CalendarCardPager and ListView. So ListView will show the events in specific date.
 We try to show the Calendar with other data, and it's a little same with Google Calendar.
 
+
+## CalendarListAdapter
+
+In some business requirement you may need a vertical scrollable Calendar, the ViewPager is not easy to do so. And you can try
+to load the CalendarCard in a ListView. So that every list item will be one month Calendar item. The effect is also nice.
+More details you can see CalendarListAdapter in the calendar-card-sample project.
+
 # Design
 
 Redesigned the Calendar UI based on the previous CalendarCard. The new UI is aimed for the Android New material design. You

@@ -5,16 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CalendarView;
 import com.wt.calendarcard.CalendarCard;
-import com.wt.calendarcard.CardGridItem;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 
 public class CalendarListAdapter extends BaseAdapter {
-    
+
     private Context context;
 
     public CalendarListAdapter(Context context) {
@@ -44,12 +40,12 @@ public class CalendarListAdapter extends BaseAdapter {
         } else {
             calendarView = (CalendarCard) convertView;
         }
-        
+
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.MONTH, position); 
+        cal.add(Calendar.MONTH, position);
         calendarView.setDateDisplay(cal);
         calendarView.notifyChanges();
-        
+
         return calendarView;
     }
 }
