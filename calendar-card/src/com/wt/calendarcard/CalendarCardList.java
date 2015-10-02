@@ -3,6 +3,7 @@ package com.wt.calendarcard;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -91,6 +92,15 @@ public class CalendarCardList extends LinearLayout {
                 if (target == null) return;
                 Event[] events = (Event[]) target.getData();
                 eventsAdapter.setData(events);
+
+                String totalStr = "";
+                if (events == null)
+                    totalStr = "Nada here";
+                else
+                    for (Event e : events)
+                      totalStr += e.getContent() + " ";
+                //@TODO: get rid of this logger
+                Log.i("===date selected==", totalStr);
             }
         });
 

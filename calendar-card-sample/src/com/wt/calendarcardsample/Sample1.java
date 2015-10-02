@@ -20,6 +20,7 @@ public class Sample1 extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sample1);
         mTextView = (TextView) findViewById(R.id.textView1);
+
         mCalendarCard = (CalendarCard) findViewById(R.id.calendarCard1);
         mCalendarCard.setOnDateSelectedListener(new CalendarCard.OnDateSelectedListener() {
             @Override
